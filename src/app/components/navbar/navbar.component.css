@@ -1,0 +1,23 @@
+.light-theme {
+    background-color: #11e7d9c6;
+    color: #000000;
+  }
+  
+  .dark-theme {
+    background-color: #333333;
+    color: #fffcfc;
+  }
+  .light-theme-Boton{
+    background-color: #11e7d9c6;
+    color: #ffffff;
+  }
+
+  .dark-theme-boton{
+    .light-theme-Boton{
+        background-color: #11e7d9c6;
+        color: #ffffff;
+      }
+ .align-right {
+        margin-left: auto;
+      }
+  }
