@@ -1,0 +1,33 @@
+<nav    class="navbar navbar-expand-lg bg-light"  >
+  <div class="container-fluid" [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}"  >
+    <img width="50" src="assets/icons/Notea.png">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div  class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link " [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}" aria-current="page" routerLink="/">Inicio</a>
+        <a class="nav-link" [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}" routerLink="/new">Nueva nota</a>
+        <a class="nav-link" [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}" routerLink="/about">Acerca de</a>
+        
+        <li class="nav-item dropdown" *ngIf="this.loginS.user">
+          <a [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Cuenta
+          </a>
+          
+          <ul class="dropdown-menu" >
+            <li [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}">   <span style="padding:10px;">{{this.loginS.user!.name}}</span></li>
+            <li [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}">   <span style="padding:10px;">{{this.loginS.user!.email}}</span></li>
+            <li [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}"><hr class="dropdown-divider"></li>
+            <li ><a [ngClass]="{'light-theme': !isDarkTheme, 'dark-theme': isDarkTheme}" class="dropdown-item" href="#" (click)="logout()" > Logout </a></li>
+            
+          </ul>
+        </li>
+       
+        <a >
+          <button  [ngClass]="{'light-theme-Boton': !isDarkTheme, 'dark-theme-boton': isDarkTheme}" (click)="toggleTheme()"  class="align-right">Cambiar Tema</button>
+          </a>
+      </div>
+    </div>
+  </div>
+</nav>

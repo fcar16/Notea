@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+asl-google-signin-button div{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align:center;
+}
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  body.dark-theme {
+    background-color: #333333;
+    color: #ffffff;
+  }

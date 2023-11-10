@@ -1,25 +1,34 @@
-import { Component } from '@angular/core';
-import { INote } from './model/INote';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from './services/login.service';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Notea';
+export class AppComponent implements OnInit {
+  isDarkTheme: any;
+  themeService: any;
+  constructor(private loginService: LoginService) {}
 
-
-  public removingNote($event:INote){
-    console.log("Eliminando Nota");
-    console.log($event);
+  ngOnInit(): void {
+    // Intenta cargar el usuario al inicio
+    this.loginService.checked = true;
+    this.loginService.isAuth();
   }
-
-  public editingNote($event:INote){
-    console.log("Editando Nota");
-    console.log($event);
-  }
-  public alerta(){
-    alert("Alerta Roja");
+  toggleTheme(): void {
+    // Agrega tu lógica para cambiar el tema aquí
+    this.isDarkTheme = !this.isDarkTheme;
+    this.themeService.setDarkTheme(this.isDarkTheme);
+  
+    // Aplica la clase directamente al body
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+    } else {
+      document.body.classList.add('light-theme');
+      document.body.classList.remove('dark-theme');
     }
+}
 }
