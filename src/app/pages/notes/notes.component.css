@@ -1,0 +1,14 @@
+.note-item {
+    /* Estilos normales de la nota */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .note-item:hover {
+    /* Estilos al pasar el ratón sobre la nota */
+    background-color: #f0f0f0;
+  }
+  

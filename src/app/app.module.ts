@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoteComponent } from './components/note/note.component';
-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotesService } from './services/notes.service';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
@@ -35,7 +32,7 @@ import { environment } from './enviroments/enviroments.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '870225859421-tacughl35u9p8rgne25culc88ujnadek.apps.googleusercontent.com'
+              '766364634811-f2gq383rnqoqls0b2jiplegqr8k7lsdh.apps.googleusercontent.com'
             )
           }
         ],

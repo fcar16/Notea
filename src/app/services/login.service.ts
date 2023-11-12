@@ -3,53 +3,55 @@ import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { GoogleLoginProvider } from "@abacritt/angularx-social-login";
 import { Router } from '@angular/router';
 
-const USER_KEY = 'social_user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  checked = false;
+  checked=false;
   user!: SocialUser;
   loggedIn!: boolean;
-  originalPath!: string;
+  originalPath!:string;
 
-  constructor(private authService: SocialAuthService, private router: Router) {
-    // Intenta cargar el usuario desde la sessionStorage al inicio
-    const storedUser = sessionStorage.getItem(USER_KEY);
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-      this.loggedIn = true;
-    }
-
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = !!user;
-
-      if (this.loggedIn) {
-        sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-        if (this.originalPath) {
-          this.router.navigate([this.originalPath]);
-          this.originalPath = '';
-        } else {
-          this.router.navigate(['']);
+  constructor(private authService: SocialAuthService, private router:Router) {
+    this.user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')!) : null;
+    if(this.user){
+      this.loggedIn=true;
+      if(this.originalPath){
+        this.router.navigate([this.originalPath]);
+        this.originalPath='';
+      }else
+        this.router.navigate(['']);
+    }else{
+      this.authService.authState.subscribe((user) => {
+        sessionStorage.setItem('user', JSON.stringify(user));
+        this.user = user;
+        this.loggedIn = (user != null);
+        if(this.loggedIn){
+          if(this.originalPath){
+            this.router.navigate([this.originalPath]);
+            this.originalPath='';
+          }else
+            this.router.navigate(['']);
+        }else{
+          this.router.navigate(['/login']);
         }
-      } else {
-        this.router.navigate(['/login']);
-      }
-    });
-  }
-
-  isAuth(): boolean {
+      });
+    }
+ }
+  isAuth():boolean{
     return this.loggedIn;
   }
-
   async refreshToken(): Promise<void> {
     return this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
-
+  /*
+  async signInWithGoogle():Promise<SocialUser> {
+    return this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }*/
   async signOut(): Promise<void> {
-    sessionStorage.removeItem(USER_KEY);
-    return await this.authService.signOut();
+    sessionStorage.removeItem('user');
+    return  this.authService.signOut();
   }
+
 }

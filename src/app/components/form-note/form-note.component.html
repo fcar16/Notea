@@ -1,12 +1,27 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <div class="form-group">
-    <label>Título</label>
-    <input #title type="text" class="form-control" formControlName="title" placeholder="Título">
+<form [formGroup]="form" (ngSubmit)="submit()" class="needs-validation" novalidate>
+  <div class="mb-3">
+    <label for="title" class="form-label">Título</label>
+    <input
+      #title
+      type="text"
+      class="form-control"
+      id="title"
+      formControlName="title"
+      placeholder="Ingresa el título"
+      required
+    />
+    <div class="invalid-feedback">Por favor, ingresa un título.</div>
   </div>
-  <div class="form-group">
-    <label>Descripción</label>
-    <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
+  <div class="mb-3">
+    <label for="description" class="form-label">Descripción</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      formControlName="description"
+      placeholder="Ingresa la descripción"
+    />
   </div>
-  <input type="hidden" formControlName="id">
-  <button type="submit" class="btn btn-primary" [disabled]="this.form.status!='VALID'">Guardar</button>
+  <input type="hidden" formControlName="id" />
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
 </form>

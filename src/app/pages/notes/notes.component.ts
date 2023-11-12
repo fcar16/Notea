@@ -7,6 +7,7 @@ import { HighlightDirective } from
 '../../directives/highlight.directive';
 import { NotesService } from '../../services/notes.service';
 import { FormNoteComponent } from '../../components/form-note/form-note.component';
+import { Theme, ThemeService } from 'src/app/services/theme.service';
 @Component({
 selector: 'app-notes',
 standalone: true,
@@ -16,9 +17,13 @@ templateUrl: './notes.component.html',
 styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
+    isDarkTheme = false;
 public _editingNote!:INote;
-constructor(public notesS:NotesService) { }
+constructor(public notesS:NotesService, private themeService: ThemeService) {    this.themeService.currentTheme$.subscribe(theme => {
+    this.isDarkTheme = theme === Theme.Dark;
+  });}
 ngOnInit(): void {
+    
 }
 public removingNote($event:INote){
 console.log("Elminando Nota");
@@ -36,4 +41,7 @@ updateNote($event:any){
 this.notesS.updateNote($event); //<-new
 document.getElementById("closeModal")?.click();
 }
+toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 }
